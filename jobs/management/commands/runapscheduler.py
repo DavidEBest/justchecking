@@ -12,7 +12,7 @@ from django_apscheduler import util
 logger = logging.getLogger(__name__)
 
 
-def my_job():
+def regular_check():
   # Your job processing logic here...
   pass
 
@@ -41,13 +41,13 @@ class Command(BaseCommand):
     scheduler.add_jobstore(DjangoJobStore(), "default")
 
     scheduler.add_job(
-      my_job,
-      trigger=CronTrigger(second="*/360"),  # Every 5 minutes
-      id="regular_check",  # The `id` assigned to each job MUST be unique
+      regular_check,
+      trigger=CronTrigger(minute="*/5"),
+      id="regular_check",
       max_instances=1,
       replace_existing=True,
     )
-    logger.info("Added job 'my_job'.")
+    logger.info("Added job 'regular_check'.")
 
     scheduler.add_job(
       delete_old_job_executions,

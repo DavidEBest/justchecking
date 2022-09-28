@@ -1,0 +1,7 @@
+.env
+.envrc
+Dockerfile
+*.sqlite3
+.DS_Store
+.git
+.gitignore
